@@ -5,7 +5,7 @@ import { ModeSwitch } from "./ModeSwitch";
 const Header = () => {
   return (
     <HStack justifyContent={"space-between"} padding={"10px"}>
-      <Image src={logo} boxSize={"60px"}></Image>
+      <Image src={logo} boxSize={"60px"} />
       <Text fontSize={"4xl"}>Race Committee Volunteers</Text>
       <ModeSwitch />
     </HStack>

@@ -3,7 +3,7 @@ import React from "react";
 import { Text } from "@chakra-ui/react";
 
 import { matrixToTable } from "../common/SortableTable/service/matrix";
-import { getDisplayColumns } from "../common/SortableTable/service/tableFunctions";
+import { getActiveTableColumns } from "../common/SortableTable/service/tableFunctions";
 import TableComp from "../common/SortableTable/components/TableComp";
 
 interface IDataListProps {
@@ -27,7 +27,7 @@ const DataList: React.FC<IDataListProps> = ({
       <Text>{error ? error : ""}</Text>
       {/* <SheetTable columns={columns} rows={rows} /> */}
       <TableComp
-        columns={getDisplayColumns()}
+        columns={getActiveTableColumns(false)}
         data={matrixToTable(columns, rows)}
       />
     </>

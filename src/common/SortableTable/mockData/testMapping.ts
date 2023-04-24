@@ -1,9 +1,5 @@
 import { TTable } from "../hooks/useSortableTable";
-import {
-  getHeaderObject,
-  getMatrixObject,
-  matrixToTable,
-} from "../service/matrix";
+import { matrixToTable } from "../service/matrix";
 import { getActiveTableColumns } from "../service/tableFunctions";
 import { ITableColumn } from "./../config/interface";
 

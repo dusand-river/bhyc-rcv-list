@@ -1,20 +1,14 @@
 import React from "react";
 import { Tbody, Tr, Td } from "@chakra-ui/react";
 import { ITableColumn } from "../config/interface";
-//import IEntry from "../mockData/tableInterface";
 import { TTable } from "../hooks/useSortableTable";
 
-interface ITableBodyProps {
+export interface ITableBodyProps {
   columns: ITableColumn[];
-  // data: IEntry[];
   data: TTable;
 }
 
-const TableBody: React.FC<ITableBodyProps> = ({
-  columns,
-  data,
-  //active,
-}) => {
+const TableBody: React.FC<ITableBodyProps> = ({ columns, data }) => {
   return (
     <Tbody>
       {data &&

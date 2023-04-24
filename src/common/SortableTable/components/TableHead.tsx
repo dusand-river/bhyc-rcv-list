@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Thead, Tr, Th, Icon } from "@chakra-ui/react";
 import { MdArrowUpward, MdArrowDownward } from "react-icons/md";
 import { ITableColumn, TSortOrder } from "../config/interface";
-import { setSortIcon } from "../service/tableColumnFunctions";
+import { setSortIcon } from "../service/tableFunctions";
 
 interface ITableHeadProps {
   columns: ITableColumn[];

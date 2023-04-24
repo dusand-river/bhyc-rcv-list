@@ -1,4 +1,4 @@
-import { convertTable } from "../service/tableColumnFunctions";
+import { convertTable } from "../service/tableFunctions";
 import mockData from "./MockData.json";
 import IEntry from "./IEntry";
 

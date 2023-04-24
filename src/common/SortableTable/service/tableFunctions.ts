@@ -1,6 +1,3 @@
-import { ReactElement } from "react";
-import { MdArrowDownward } from "react-icons/md";
-import { Icon } from "@chakra-ui/react";
 import { ITableColumn } from "../config/interface";
 import tableColumns from "../config/tableColumns";
 import { TTableRow } from "../hooks/useSortableTable";
@@ -49,7 +46,3 @@ export const setSortIcon = (
   }
   return answer;
 };
-
-// export const setTest = (): ReactElement => {
-// return <Icon as={MdArrowDownward} />;
-// };

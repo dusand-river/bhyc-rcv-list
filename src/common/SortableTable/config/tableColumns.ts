@@ -7,8 +7,8 @@ const tableColumns: ITableColumn[] = [
   { key: "task", label: "Task", sortable: true, active: true },
   { key: "crewCount", label: "Crew count", sortable: false, active: true },
   { key: "boat", label: "Boat", sortable: true, active: true },
-  { key: "email", label: "Email", sortable: false, active: true },
-  { key: "mobile", label: "Mobile", sortable: false, active: true },
+  { key: "email", label: "Email", sortable: false, active: false },
+  { key: "mobile", label: "Mobile", sortable: false, active: false },
   { key: "series", label: "Series", sortable: true, active: false },
   {
     key: "eventDate",
@@ -17,6 +17,7 @@ const tableColumns: ITableColumn[] = [
     active: true,
     sortByOrder: "asc",
   },
+  { key: "timestamp", label: "Timestamp", sortable: true, active: true },
 ];
 
 export default tableColumns;

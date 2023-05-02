@@ -3,6 +3,7 @@ import { Thead, Tr, Th, Icon } from "@chakra-ui/react";
 import { MdArrowUpward, MdArrowDownward } from "react-icons/md";
 import { ITableColumn, TSortOrder } from "../config/interface";
 import { setSortIcon } from "../service/tableFunctions";
+import TableSortIcon from "./TableSortIcon";
 
 interface ITableHeadProps {
   columns: ITableColumn[];
@@ -37,20 +38,7 @@ const TableHead: React.FC<ITableHeadProps> = ({ columns, handleSorting }) => {
                 onClick={() => handleSortingChange(column)}
               >
                 {`${column.label}  `}
-                {setSortIcon(column, sortField, order) === "up" ? (
-                  <Icon as={MdArrowUpward} />
-                ) : setSortIcon(column, sortField, order) === "down" ? (
-                  <Icon as={MdArrowDownward} />
-                ) : (
-                  ""
-                )}
-                {/* // {sortField === column.key && order === "asc" ? (
-                //   <Icon as={MdArrowUpward} />
-                // ) : sortField === column.key && order === "desc" ? (
-                //   <Icon as={MdArrowDownward} />
-                // ) : (
-                //   ""
-                // )} */}
+                <TableSortIcon column={column} sortField={sortField} sortOrder={order} />
               </Th>
             );
           })}

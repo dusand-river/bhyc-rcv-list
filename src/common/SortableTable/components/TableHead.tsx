@@ -17,8 +17,7 @@ const TableHead: React.FC<ITableHeadProps> = ({ columns, handleSorting }) => {
     if (column.sortable) {
       //console.log("Pressed", column);
       setSortField(column.key);
-      const sortOrder =
-        column.key === column.key && order === "asc" ? "desc" : "asc";
+      const sortOrder = column.key === column.key && order === "asc" ? "desc" : "asc";
       setOrder(sortOrder);
       handleSorting(column.key, sortOrder);
     } else {

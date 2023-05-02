@@ -1,5 +1,5 @@
 import React from "react";
-import { Tbody, Tr, Td } from "@chakra-ui/react";
+import { Tbody, Tr, Td, TableContainer } from "@chakra-ui/react";
 import { ITableColumn } from "../config/interface";
 import { TTable } from "../hooks/useSortableTable";
 
@@ -17,9 +17,8 @@ const TableBody: React.FC<ITableBodyProps> = ({ columns, data }) => {
             <Tr key={rowIdx}>
               {columns.map((column: ITableColumn, colIdx) => {
                 return (
-                  <Td key={colIdx}>
+                  <Td key={colIdx} style={{ maxWidth: "300px", whiteSpace: "break-spaces" }}>
                     {data[column.key]}
-                    {/* {(data as any)[column.key] as unknown as any} */}
                   </Td>
                 );
               })}

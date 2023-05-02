@@ -9,10 +9,7 @@ function getDefaultSorting(defaultTableData: TTable, columns: ITableColumn[]) {
     const filterColumn = columns.filter((column) => column.sortByOrder);
 
     // Merge all array objects into single object and extract accessor and sortByOrder keys
-    let { key: key = "id", sortByOrder = "asc" } = Object.assign(
-      {},
-      ...filterColumn
-    );
+    let { key: key = "id", sortByOrder = "asc" } = Object.assign({}, ...filterColumn);
 
     if (a[key] === null) return 1;
     if (b[key] === null) return -1;
@@ -32,20 +29,16 @@ interface UseSortableTableOutput {
   sortedTable: TTable;
   sort: (sortField: string, sortOrder: TSortOrder) => void;
 }
-function useSortableTable(
-  columns: ITableColumn[],
-  tableData: TTable
-): UseSortableTableOutput {
+function useSortableTable(columns: ITableColumn[], tableData: TTable): UseSortableTableOutput {
   const [sortedTable, setSortedTable] = useState<TTable>([]);
 
   useEffect(() => {
     /* NOTE:
-     ** Initialization happens only on first execution... at thet time table is empty!
+     ** State initialization happens only on first execution... at thet time table is empty!
      ** That is why we need to initialize state here
      */
     setSortedTable([]);
-    if (tableData && tableData?.length > 0)
-      setSortedTable(getDefaultSorting(tableData, columns));
+    if (tableData && tableData?.length > 0) setSortedTable(getDefaultSorting(tableData, columns));
   }, [tableData]);
 
   function sort(sortField: string, sortOrder: TSortOrder): void {

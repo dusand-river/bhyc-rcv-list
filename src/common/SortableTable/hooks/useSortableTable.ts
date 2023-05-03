@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ITableColumn, TSortOrder } from "../config/interface";
+//import { ActionContext } from "../../../App";
 
 export type TTableRow = Record<string, any>;
 export type TTable = Record<string, any>[];
@@ -31,14 +32,26 @@ interface UseSortableTableOutput {
 }
 function useSortableTable(columns: ITableColumn[], tableData: TTable): UseSortableTableOutput {
   const [sortedTable, setSortedTable] = useState<TTable>([]);
-
+  //const { isAction, setIsAction } = useContext(ActionContext);
   useEffect(() => {
     /* NOTE:
      ** State initialization happens only on first execution... at thet time table is empty!
      ** That is why we need to initialize state here
      */
     setSortedTable([]);
+    // setIsAction(false);
     if (tableData && tableData?.length > 0) setSortedTable(getDefaultSorting(tableData, columns));
+
+    // console.log("hook: action Context", isAction);
+    // if (tableData && tableData?.length > 0) {
+    //   if (isAction === true) {
+    //     sort("", "");
+    //     setIsAction(false);
+    //   } else {
+    //     setSortedTable([]);
+    //     setSortedTable(getDefaultSorting(tableData, columns));
+    //   }
+    // }
   }, [tableData]);
 
   function sort(sortField: string, sortOrder: TSortOrder): void {

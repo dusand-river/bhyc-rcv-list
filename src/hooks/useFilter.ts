@@ -11,8 +11,10 @@ interface IuseFilterProps {
 const useFilter = ({ rows, headers }: IuseFilterProps) => {
   const [filteredRows, setFilteredRows] = useState<string[][]>([]);
   const [filters, setFilters] = useState<IFilter[]>([]);
+  const [filterChanged, setFilterChanged] = useState<boolean>(false);
 
   useEffect(() => {
+    setFilterChanged(false);
     setFilteredRows([...rows]);
   }, [rows]);
 
@@ -26,6 +28,8 @@ const useFilter = ({ rows, headers }: IuseFilterProps) => {
     setFilters(updatedFilter);
     // filter data
     setFilteredData(updatedFilter, rows);
+    // filter changed
+    setFilterChanged(true);
   };
 
   const setFilteredData = (filters: IFilter[], rows: string[][]) => {
@@ -47,7 +51,7 @@ const useFilter = ({ rows, headers }: IuseFilterProps) => {
     setFilteredRows([...newRows]);
   };
 
-  return { filteredRows, handleFilterChange };
+  return { filteredRows, handleFilterChange, filterChanged };
 };
 
 export default useFilter;

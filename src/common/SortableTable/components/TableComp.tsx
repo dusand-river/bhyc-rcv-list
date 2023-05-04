@@ -5,19 +5,22 @@ import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import { ITableColumn } from "../config/interface";
 import useSortableTable, { TTable } from "../hooks/useSortableTable";
-//import { ActionContext } from "../../../App";
 
 interface ITableCompProps {
   columns: ITableColumn[];
   data: TTable;
 }
 const TableComp: React.FC<ITableCompProps> = ({ columns, data }) => {
-  const { sortedTable: table, sort: handleSorting } = useSortableTable(columns, data);
+  const {
+    sortedTable: table,
+    sort: handleSorting,
+    setSortRequest: handleSortRequest,
+  } = useSortableTable(columns, data);
 
   return (
     <TableContainer>
       <Table variant="simple">
-        <TableHead {...{ columns, handleSorting }} />
+        <TableHead {...{ columns, handleSorting, handleSortRequest }} />
         <TableBody {...{ columns, data: table }} />
       </Table>
     </TableContainer>

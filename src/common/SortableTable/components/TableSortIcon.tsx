@@ -1,6 +1,7 @@
 import { ITableColumn } from "../config/interface";
 import { Icon } from "@chakra-ui/react";
 import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
+
 import { setSortIcon } from "../service/tableFunctions";
 
 interface ITableSortIconProps {
@@ -11,9 +12,9 @@ interface ITableSortIconProps {
 const TableSortIcon: React.FC<ITableSortIconProps> = ({ column, sortField, sortOrder }) => {
   const iconName: string = setSortIcon(column, sortField, sortOrder);
   return iconName === "up" ? (
-    <Icon as={MdArrowUpward} />
+    <Icon as={MdArrowUpward} boxSize={4} />
   ) : iconName === "down" ? (
-    <Icon as={MdArrowDownward} />
+    <Icon as={MdArrowDownward} boxSize={4} />
   ) : null;
 };
 

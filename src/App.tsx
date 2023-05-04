@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     setIsAction(filterChanged);
   }, [filterChanged]);
-  console.log("isAction", isAction);
+
   return (
     <ActionContext.Provider value={{ isAction, setIsAction }}>
       <Grid templateAreas={`"header" "filter" "main"`} gap="1" color="blackAlpha.700">

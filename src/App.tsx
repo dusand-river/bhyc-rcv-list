@@ -1,16 +1,12 @@
-//import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 
 import Header from "./components/Header";
 import FilterButtons from "./components/FilterButtons";
 import DataList from "./components/DataList";
-//import { IFilter } from "./interface/filter";
 import useSheets from "./hooks/useSheet";
 import useFilter from "./hooks/useFilter";
-//import { filterByDate, filterRows, getEvents, setNewFilter } from "./service/filterData";
 import { getEvents } from "./service/filterData";
-//import { CurrentDateFilter } from "./config/filters";
 
 interface IActionContextInterface {
   isAction: boolean;

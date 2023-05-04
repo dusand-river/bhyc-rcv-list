@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Table, TableContainer } from "@chakra-ui/react";
 
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
-import { ITableColumn } from "../config/interface";
+import { ITableColumn, TSortOrder } from "../config/interface";
 import useSortableTable, { TTable } from "../hooks/useSortableTable";
 
 interface ITableCompProps {
@@ -13,9 +13,13 @@ interface ITableCompProps {
 const TableComp: React.FC<ITableCompProps> = ({ columns, data }) => {
   const {
     sortedTable: table,
-    sort: handleSorting,
+    sort: sort,
     setSortRequest: handleSortRequest,
   } = useSortableTable(columns, data);
+
+  const handleSorting = (sortField: string, sortOrder: TSortOrder) => {
+    sort(sortField, sortOrder, data);
+  };
 
   return (
     <TableContainer>

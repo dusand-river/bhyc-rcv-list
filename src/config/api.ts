@@ -1,21 +1,25 @@
 import SHEETS from "./sheets";
 
 const sheetAPI = {
-  apiKey: "AIzaSyBPXVe9nXfFK0y7ThJJL5hyrxz82FaFzd4", // sheetAPI project
+  // apiKey: "AIzaSyBPXVe9nXfFK0y7ThJJL5hyrxz82FaFzd4", // sheetAPI project
+  apiKey: import.meta.env.VITE_API_KEY, // sheetAPI project
+  // sheetAPI project
   auth: {
-    username: "bhyc.rcsail@gmail.com",
-    password: "gTkmMA49iN6ULp",
+    // username: "bhyc.rcsail@gmail.com",
+    // password: "gTkmMA49iN6ULp",
+    username: import.meta.env.VITE_USER,
+    password: import.meta.env.VITE_PWD,
   },
 
-  oAuth: {
-    client_id: "731023753425-l6pu6gl60tnsvl1688oo9hbdk0e4n304.apps.googleusercontent.com",
-    project_id: "sheetapi-382114",
-    auth_uri: "https://accounts.google.com/o/oauth2/auth",
-    token_uri: "https://oauth2.googleapis.com/token",
-    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-    client_secret: "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",
-    redirect_uris: ["http://localhost"],
-  },
+  // oAuth: {
+  //   client_id: "731023753425-l6pu6gl60tnsvl1688oo9hbdk0e4n304.apps.googleusercontent.com",
+  //   project_id: "sheetapi-382114",
+  //   auth_uri: "https://accounts.google.com/o/oauth2/auth",
+  //   token_uri: "https://oauth2.googleapis.com/token",
+  //   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+  //   client_secret: "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",
+  //   redirect_uris: ["http://localhost"],
+  // },
 };
 
 const template = {

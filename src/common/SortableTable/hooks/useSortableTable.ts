@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { ITableColumn, TSortOrder } from "../config/interface";
+import { useContext, useEffect, useState } from "react";
+import { ITableColumn, TSortOrder, TSortRequest } from "../config/interface";
+import { ActionContext } from "../../../App";
 
 export type TTableRow = Record<string, any>;
 export type TTable = Record<string, any>[];
@@ -9,10 +10,7 @@ function getDefaultSorting(defaultTableData: TTable, columns: ITableColumn[]) {
     const filterColumn = columns.filter((column) => column.sortByOrder);
 
     // Merge all array objects into single object and extract accessor and sortByOrder keys
-    let { key: key = "id", sortByOrder = "asc" } = Object.assign(
-      {},
-      ...filterColumn
-    );
+    let { key: key = "id", sortByOrder = "asc" } = Object.assign({}, ...filterColumn);
 
     if (a[key] === null) return 1;
     if (b[key] === null) return -1;
@@ -30,27 +28,33 @@ function getDefaultSorting(defaultTableData: TTable, columns: ITableColumn[]) {
 
 interface UseSortableTableOutput {
   sortedTable: TTable;
-  sort: (sortField: string, sortOrder: TSortOrder) => void;
+  sort: (sortField: string, sortOrder: TSortOrder, data: TTable) => void;
+  setSortRequest: (request: TSortRequest) => void;
 }
-function useSortableTable(
-  columns: ITableColumn[],
-  tableData: TTable
-): UseSortableTableOutput {
+function useSortableTable(columns: ITableColumn[], tableData: TTable): UseSortableTableOutput {
   const [sortedTable, setSortedTable] = useState<TTable>([]);
-
+  const [sortRequest, setSortRqs] = useState<TSortRequest>();
+  const { isAction, setIsAction } = useContext(ActionContext);
   useEffect(() => {
     /* NOTE:
-     ** Initialization happens only on first execution... at thet time table is empty!
+     ** State initialization happens only on first execution... at thet time table is empty!
      ** That is why we need to initialize state here
      */
-    setSortedTable([]);
-    if (tableData && tableData?.length > 0)
-      setSortedTable(getDefaultSorting(tableData, columns));
+    if (tableData && tableData?.length > 0) {
+      if (isAction === true) {
+        // preserve existing sort order
+        if (sortRequest) sort(sortRequest?.sortField, sortRequest?.sortOrder, tableData);
+      } else {
+        setSortedTable([]);
+        setSortedTable(getDefaultSorting(tableData, columns));
+      }
+    }
   }, [tableData]);
 
-  function sort(sortField: string, sortOrder: TSortOrder): void {
-    if (sortField) {
-      const newSortedTable = [...sortedTable].sort((a, b) => {
+  function sort(sortField: string, sortOrder: TSortOrder, data: TTable): void {
+    if (sortField && data) {
+      // const newSortedTable = [...sortedTable].sort((a, b) => {
+      const newSortedTable = [...data].sort((a, b) => {
         if (a[sortField] === null) return 1;
         if (b[sortField] === null) return -1;
         if (a[sortField] === null && b[sortField] === null) return 0;
@@ -63,7 +67,11 @@ function useSortableTable(
       setSortedTable(newSortedTable);
     }
   }
-  return { sortedTable, sort };
+  function setSortRequest(request: TSortRequest): void {
+    setSortRqs(request);
+  }
+
+  return { sortedTable, sort, setSortRequest };
 }
 
 export default useSortableTable;

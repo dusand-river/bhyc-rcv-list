@@ -7,6 +7,7 @@ export interface ITableColumn {
 }
 
 export type TSortOrder = "asc" | "desc";
+export type TSortRequest = { sortField: string; sortOrder: TSortOrder };
 
 export interface IMatrixRow {
   event?: string;

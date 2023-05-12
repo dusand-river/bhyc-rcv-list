@@ -10,7 +10,10 @@ function getDefaultSorting(defaultTableData: TTable, columns: ITableColumn[]) {
     const filterColumn = columns.filter((column) => column.sortByOrder);
 
     // Merge all array objects into single object and extract accessor and sortByOrder keys
-    let { key: key = "id", sortByOrder = "asc" } = Object.assign({}, ...filterColumn);
+    let { key: key = "id", sortByOrder = "asc" } = Object.assign(
+      {},
+      ...filterColumn
+    );
 
     if (a[key] === null) return 1;
     if (b[key] === null) return -1;
@@ -31,19 +34,21 @@ interface UseSortableTableOutput {
   sort: (sortField: string, sortOrder: TSortOrder, data: TTable) => void;
   setSortRequest: (request: TSortRequest) => void;
 }
-function useSortableTable(columns: ITableColumn[], tableData: TTable): UseSortableTableOutput {
+function useSortableTable(
+  columns: ITableColumn[],
+  tableData: TTable
+): UseSortableTableOutput {
   const [sortedTable, setSortedTable] = useState<TTable>([]);
   const [sortRequest, setSortRqs] = useState<TSortRequest>();
-  const { isAction, setIsAction } = useContext(ActionContext);
   useEffect(() => {
     /* NOTE:
      ** State initialization happens only on first execution... at thet time table is empty!
      ** That is why we need to initialize state here
      */
     if (tableData && tableData?.length > 0) {
-      if (isAction === true) {
+      if (sortRequest) {
         // preserve existing sort order
-        if (sortRequest) sort(sortRequest?.sortField, sortRequest?.sortOrder, tableData);
+        sort(sortRequest?.sortField, sortRequest?.sortOrder, tableData);
       } else {
         setSortedTable([]);
         setSortedTable(getDefaultSorting(tableData, columns));
@@ -53,7 +58,6 @@ function useSortableTable(columns: ITableColumn[], tableData: TTable): UseSortab
 
   function sort(sortField: string, sortOrder: TSortOrder, data: TTable): void {
     if (sortField && data) {
-      // const newSortedTable = [...sortedTable].sort((a, b) => {
       const newSortedTable = [...data].sort((a, b) => {
         if (a[sortField] === null) return 1;
         if (b[sortField] === null) return -1;
